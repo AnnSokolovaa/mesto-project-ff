@@ -1,6 +1,6 @@
 import { checkResponse, request } from "../utils/api";
 
-const api_config = {
+const apiConfig = {
   headers: {
     authorization: "8883cffe-7e09-492f-8029-89217bdff786",
     "Content-Type": "application/json",
@@ -8,13 +8,11 @@ const api_config = {
 };
 
 export function whoami() {
-  return request("/users/me", api_config);
+  return request("/users/me", apiConfig);
 }
 
 export function fetchCards() {
-  return request(`/cards`, api_config).catch((err) =>
-    console.log(`Ошибка ${err}`),
-  );
+  return request(`/cards`, apiConfig);
 }
 
 export function updateProfile(config) {
@@ -24,7 +22,7 @@ export function updateProfile(config) {
       name: config.name,
       about: config.about,
     }),
-    ...api_config,
+    ...apiConfig,
   });
 }
 
@@ -35,22 +33,22 @@ export function postCard(config) {
       name: config.name,
       link: config.link,
     }),
-    ...api_config,
+    ...apiConfig,
   });
 }
 
 export function deleteCard(config) {
   return request(`/cards/${config._id}`, {
     method: "DELETE",
-    ...api_config,
+    ...apiConfig,
   });
 }
 
 export function likeCard(config) {
   return request(`/cards/likes/${config._id}`, {
     method: config.add ? "PUT" : "DELETE",
-    ...api_config,
-  }).catch((err) => console.log(`Ошибка ${err}`));
+    ...apiConfig,
+  });
 }
 
 export function editAvatar(config) {
@@ -59,6 +57,6 @@ export function editAvatar(config) {
     body: JSON.stringify({
       avatar: config.avatar,
     }),
-    ...api_config,
+    ...apiConfig,
   });
 }
