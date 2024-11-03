@@ -1,6 +1,7 @@
-import { cardTemplate } from "..";
 import { likeCard } from "./api";
 import { openModal } from "./modal";
+
+const cardTemplate = document.querySelector("#card-template").content;
 
 export function createCard(card, formDelete, likeAdd, showImage, profileId) {
   const cardElement = cardTemplate.cloneNode(true);

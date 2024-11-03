@@ -14,7 +14,6 @@ import {
   deleteCard,
 } from "./components/api.js";
 import "./styles/index.css";
-export const cardTemplate = document.querySelector("#card-template").content;
 
 const showImage = function (evt) {
   popupImage.src = evt.target.src;
@@ -140,19 +139,17 @@ function handleFormEditSubmit(evt) {
 
   renderLoading(evt, true);
   updateProfile({
-    name: nameInputinputTypeName.value,
-    about: jobInput.value,
+    name: inputTypeName.value,
+    about: inputTypeDescription.value,
   })
     .then((profile) => {
       renderProfile(profile, profileConfig);
-      nameInputinputTypeName.value = "";
-      jobInput.value = "";
       closeModal(evt.target.closest(".popup"));
     })
+    .catch((err) => console.log(`Ошибка ${err}`))
     .finally(() => {
       renderLoading(evt, false);
-    })
-    .catch((err) => console.log(`Ошибка ${err}`));
+    });
 }
 
 function handleFormSubmitAdd(evt) {
@@ -176,9 +173,11 @@ function handleFormSubmitAdd(evt) {
       newCardTitle.value = "";
       newCardLink.value = "";
       closeModal(evt.target.closest(".popup"));
-      renderLoading(evt, false);
     })
-    .catch((err) => console.log(`Ошибка ${err}`));
+    .catch((err) => console.log(`Ошибка ${err}`))
+    .finally(() => {
+      renderLoading(evt, false);
+    });
 }
 
 function handleFormSubmitAvatar(evt) {
