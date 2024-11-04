@@ -159,6 +159,7 @@ function handleFormSubmitAdd(evt) {
     link: newCardLink.value,
   };
   renderLoading(evt, true);
+  evt.target.reset();
   postCard(newCard)
     .then((newCard) => {
       cardsContainer.prepend(
@@ -170,8 +171,6 @@ function handleFormSubmitAdd(evt) {
           newCard.owner._id,
         ),
       );
-      newCardTitle.value = "";
-      newCardLink.value = "";
       closeModal(evt.target.closest(".popup"));
     })
     .catch((err) => console.log(`Ошибка ${err}`))
@@ -192,9 +191,11 @@ function handleFormSubmitAvatar(evt) {
       renderProfile(profile, profileConfig);
       avatarLink.value = "";
       closeModal(evt.target.closest(".popup"));
-      renderLoading(evt, false);
     })
-    .catch((err) => console.log(`Ошибка ${err}`));
+    .catch((err) => console.log(`Ошибка ${err}`))
+    .finally(() => {
+      renderLoading(evt, false);
+    });
 }
 
 function findCard(_id) {
