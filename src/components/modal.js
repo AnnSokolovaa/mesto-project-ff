@@ -1,16 +1,15 @@
-function closePopupByEscape(event) {
+function escapeFromPopup(event) {
   if (event.key === "Escape") {
     closeModal(document.querySelector(".popup_is-opened"));
   }
-}
-
+} // @todo: Вывести карточки на страницу
 export function openModal(popup) {
   popup.classList.add("popup_is-opened");
-  document.addEventListener("keydown", closePopupByEscape);
+  document.addEventListener("keydown", escapeFromPopup);
 }
 export function closeModal(popup) {
   popup.classList.remove("popup_is-opened");
-  document.removeEventListener("keydown", closePopupByEscape);
+  document.removeEventListener("keydown", escapeFromPopup);
 }
 export function closePopupByOverlay() {
   return function (event) {
